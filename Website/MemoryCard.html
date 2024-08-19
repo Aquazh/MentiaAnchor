@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match The Card</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.0-beta.23/lenis.min.js"></script>
+    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+    <link rel="stylesheet" href="MemoryGame.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-color: #0b3868;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #0b3868 !important;
+        }
+
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <audio id="hover-sound" preload="auto">
+        <source src="Assets/hover.mp3" type="audio/mp3">
+    </audio>
+    <audio autoplay id="background-music" loop = "loop" src="backgroundMusic1.mp3" type="audio/mpeg">
+        <!-- <source src="backgroundMusicBrazil.mp3" type="audio/mpeg"> -->
+    </audio>
+    <div class="nav justify-content-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Mind Anchor</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Games
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Website/wordle_clone-master/build/Wordle.html">Game #1</a></li>
+                                <li><a class="dropdown-item" href="MemoryCard.html">Game #2</a></li>
+                                <li><a class="dropdown-item" href="/Website/spelling_bee-master/spelling_bee.html">Game #3</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="aboutus.html">About Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <header class="header">
+          <h1>Match The Card</h1>
+        </header>
+    
+        <!--Start modal section-->
+        <section class="start-game-modal">
+          <div id="start-modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <h2>Welcome!</h2>
+              <p>Choose the game mode</p>
+              <div class="modal-content-options">
+                <button class="btn play-again-btn" id="easyGame">Easy</button>
+                <button class="btn play-again-btn" id="mediumGame">Medium</button>
+                <button class="btn play-again-btn" id="hardGame">Hard</button>
+              </div>
+            </div>
+          </div>
+        </section>
+    
+        <!-- Modal section-->
+    
+        <section class="win-game-modal">
+          <section class="score-panel">
+            <div class="timer-container">⏱ <span class="timer">00:00</span></div>
+            <ul id="star-rating" class="star-rating">
+              <li class="star"><i class="fa fa-star fa-lg"></i></li>
+              <li class="star"><i class="fa fa-star fa-lg"></i></li>
+              <li class="star"><i class="fa fa-star fa-lg"></i></li>
+            </ul>
+            <span>
+              <span class="moves-counter">0</span>
+              Moves
+            </span>
+            <button class="btn reset-btn">
+              <i class="fa fa-repeat"></i>
+            </button>
+          </section>
+    
+          <div id="modal" class="modal win">
+            <!-- Modal content -->
+            <div class="modal-content" id="win-modal-content">
+              <div id="modal-details">
+                <span class="close">&times;</span>
+                <h2>Congratulations!</h2>
+                <p>You have won the game and found all pairs of cards.</p>
+                <img class="modal-img" src="img/thumb_up.jpg" alt="Vault boy giving the thumbs up from the game fall out" />
+                <button class="btn play-again-btn" id="play-again">
+                  Play Again?
+                </button>
+              </div>
+    
+            </div>
+          </div>
+        </section>
+    
+        <ul class="deck"></ul>
+        <h4>
+          Made by<a id="maker" target="_blank">
+            &copy; Augusto 😎</a>
+        </h4>
+      </div>
+      <script src="MemoryGame.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lenis for smooth scrolling
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Ease-out cubic
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                smoothTouch: false
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+
+            // GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+            // Hover sound effect
+            var hoverSound = document.getElementById('hover-sound');
+            var interactiveTexts = document.querySelectorAll('.interactive-text');
+            interactiveTexts.forEach(function(text) {
+                text.addEventListener('mouseenter', function() {
+                    hoverSound.play();
+                    text.style.color = '#063a6b';
+                });
+
+                text.addEventListener('mouseleave', function() {
+                    text.style.color = '#0b3868';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
